@@ -1,0 +1,16 @@
+.content__sideBar {
+  background-color: white;
+  padding: 21px;
+
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: minmax(50px, 100px) minmax(50px, 100px);
+}
+
+.sideBar__sky:hover {
+  transform: scale(1.2);
+}
+
+.sideBar__book:hover {
+  transform: scale(1.2);
+}

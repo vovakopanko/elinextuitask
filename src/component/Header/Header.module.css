@@ -1,0 +1,26 @@
+.application__header {
+  background-color: rgb(209, 205, 205);
+
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+}
+
+.header__nameApp {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  justify-self: start;
+
+  padding: 5px 20px 5px 20px;
+}
+
+.header__iconApp {
+  grid-column-start: 3;
+  grid-column-end: 4;
+  justify-self: end;
+
+  padding: 5px 20px 5px 20px;
+}
+
+.header__iconApp:hover {
+  transform: scale(1.2);
+}
