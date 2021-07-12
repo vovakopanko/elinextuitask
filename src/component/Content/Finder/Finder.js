@@ -4,24 +4,25 @@ import Pagination from "@material-ui/lab/Pagination";
 import { useEffect, useState } from "react";
 import { getImages } from "../../../services/api";
 import style from "./Finder.module.css";
-import Images from "./Images/Image";
+import Images from "./Images/Images";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
       marginTop: theme.spacing(4),
     },
-    float: "right",
+    // float: "right",
+    marginLeft: "auto",
   },
   search: {},
 }));
 
 const Finder = () => {
-  const [data, setData] = useState([]);
+  const [image, setImage] = useState([]);
 
   useEffect(() => {
     getImages().then((Response) => {
-      setData(Response.data.photos.photo);
+      setImage(Response.data.photos.photo);
     });
   }, []);
 
@@ -33,10 +34,10 @@ const Finder = () => {
         <TextField className={classes.search} label="Search Images"></TextField>
       </Box>
       <Box className={classes.root}>
-        <Pagination count={200} variant="outlined" shape="rounded" />
+        <Pagination count={20} variant="outlined" shape="rounded" />
       </Box>
       <Box>
-          {data.map(d=><Images/>)}
+        <Images image={image} />
       </Box>
     </div>
   );
