@@ -3,7 +3,6 @@
   background-color: green;
 
   display: grid;
-  display: grid;
   grid-template-columns: minmax(50px, auto) 1fr;
   grid-template-rows: minmax(700px, auto);
 }
