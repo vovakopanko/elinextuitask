@@ -1,12 +1,16 @@
+import { Grid } from "@material-ui/core";
 import Image from "./Image";
-import style from "./Images.module.css";
 
 const Images = ({ image }) => {
   return (
-    <div className={style.images__block}>
-      {image.map((img) => (
-        <Image key={img} img={img} />
-      ))}
+    <div>
+      <Grid container>
+        {image.map((img) => (
+          <Grid xs={3} item>
+            <Image key={img} img={img} />
+          </Grid>
+        ))}
+      </Grid>
     </div>
   );
 };

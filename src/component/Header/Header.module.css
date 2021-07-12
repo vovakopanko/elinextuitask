@@ -9,6 +9,7 @@
   grid-column-start: 1;
   grid-column-end: 2;
   justify-self: start;
+  font-size: 30px;
 
   padding: 5px 20px 5px 20px;
 }
