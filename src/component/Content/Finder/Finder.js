@@ -20,12 +20,17 @@ const useStyles = makeStyles((theme) => ({
 const Finder = () => {
   const [image, setImage] = useState([]);
   const [count, setCount] = useState(1);
-  const [searchName, setSearchName] = useState("IT technologies");
+  const [page, setPage] = useState(1);
+  const [emptyPage, setEmptyPage] = useState();
+  const [searchName, setSearchName] = useState("Belarus");
 
   useEffect(() => {
     getImages(count, searchName)
       .then((Response) => {
+        console.log(Response);
         setImage(Response.data.photos.photo);
+        setPage(Response.data.photos.pages);
+        setEmptyPage(Response.data.photos.total);
       })
       .catch(() => <Redirect to="/finder" />);
   }, [count, searchName]);
@@ -49,18 +54,30 @@ const Finder = () => {
           onChange={(e) => onNameChange(e.target.value)}
         ></TextField>
       </Box>
-      <Box className={classes.root}>
-        <Pagination
-          count={20}
-          variant="outlined"
-          shape="rounded"
-          defaultPage={1}
-          onChange={(e, page) => onNumberChange(e.target.value, page)}
-        />
-      </Box>
-      <Box>
-        <Images image={image} />
-      </Box>
+
+      {emptyPage ? (
+        <Box>
+          <Box className={classes.root}>
+            <Pagination
+              count={20}
+              variant="outlined"
+              shape="rounded"
+              defaultPage={1}
+              count={page}
+              onChange={(e, page) => onNumberChange(e.target.value, page)}
+            />
+          </Box>
+           <Box>
+            <Images image={image} />
+          </Box>
+        </Box>
+      ) : (
+        <Box>
+          <span>
+            No images here. Would you try to search for anything else?
+          </span>
+        </Box>
+      )}
     </div>
   );
 };

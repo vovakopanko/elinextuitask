@@ -1,21 +1,6 @@
-.images__block {
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  width: minmax(20px, auto);
-  height: minmax(20px, auto);
+.block__images {
+  overflow: scroll;
+  height: 780px;
+
 }
 
-.block__image {
-}
-
-.block__image img {
-  margin: 20px;
-}
-
-.block__bookmark {
-  margin: 10px;
-}
-
-.block__description {
-  margin: 10px;
-}

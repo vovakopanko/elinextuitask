@@ -1,4 +1,6 @@
 import { makeStyles } from "@material-ui/core";
+import { useState } from "react";
+import { useEffect } from "react";
 import style from "./Images.module.css";
 
 const useStyles = makeStyles({
@@ -10,6 +12,12 @@ const useStyles = makeStyles({
 });
 
 const Image = ({ img }) => {
+  const [tag, setTeg] = useState([]);
+  useEffect(() => {}, []);
+  const onAddTagsForCurrentPhoto = (event) => {
+    setTeg(event);
+    console.log(event)
+  };
   const styless = useStyles();
 
   const srcPath =
@@ -28,12 +36,13 @@ const Image = ({ img }) => {
         <img src={srcPath} alt="random img" className={styless.image} />
       </div>
       <div className={style.block__bookmark}>
-        <button>Bookmark it</button>
+        <button onClick={() => alert("You add Bookmark")}>Bookmark it</button>
       </div>
       <div>
         <input
           placeholder="some tags?"
           className={style.block__description}
+          onChange={(e) => onAddTagsForCurrentPhoto(e.target.value)}
         ></input>
       </div>
     </div>
