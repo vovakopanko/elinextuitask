@@ -1,5 +1,6 @@
 .content__finder {
     background-color: rgb(236, 236, 236);
+    border: 2px solid black;
   }
 
   .finder__search{
@@ -7,4 +8,12 @@
     border: 2px solid black;
     align-items: center;
     justify-content: center;
+  }
+
+  .search__button{
+    margin: 10px;
+  }
+
+  .root{
+    justify-content: flex-end;
   }

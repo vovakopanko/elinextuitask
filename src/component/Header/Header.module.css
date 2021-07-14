@@ -1,5 +1,5 @@
 .application__header {
-  background-color: rgb(208, 209, 205);
+  background-color: rgb(35, 60, 128);
 
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
@@ -10,7 +10,8 @@
   grid-column-end: 2;
   justify-self: start;
   font-size: 30px;
-  color: rgb(92, 175, 175);
+  color: white;
+  align-items: center;
   
 
   padding: 5px 20px 5px 20px;
@@ -25,5 +26,5 @@
 }
 
 .header__iconApp:hover {
-  transform: scale(1.2);
+  transform: scale(1.1);
 }

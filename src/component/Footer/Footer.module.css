@@ -1,7 +1,7 @@
 .application__footer {
-  background-color: rgb(209, 205, 205);
+  background-color: rgb(35, 60, 128);
   text-align: left;
   font-size: 18px;
   padding: 10px 10px 10px 20px;
-  color: rgb(92, 175, 175);
+  color: white;
 }

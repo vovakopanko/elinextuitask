@@ -1,5 +1,4 @@
 import { Grid, makeStyles } from "@material-ui/core";
-import { wrap } from "module";
 import Image from "./Image";
 import style from "./Images.module.css";
 
@@ -16,8 +15,8 @@ const Images = ({ image }) => {
     <div className={style.block__images}>
       <Grid container>
         {image.map((img) => (
-          <Grid xs={4} item className={styless.images}>
-            <Image key={img} img={img} />
+          <Grid xs={4} key={img.id} item className={styless.images}>
+            <Image img={img} />
           </Grid>
         ))}
       </Grid>

@@ -13,3 +13,13 @@ export const getImages = (count,searchName) => {
     console.log(error);
   }
 };
+
+export const addFavorites = (id) => {
+  try {
+    return axios.post(
+      `${baseURL}flickr.favorites.add&api_key=${API_KEY}&photo_id=${id}&format=json&nojsoncallback=1`
+    );
+  } catch (error) {
+    console.log(error);
+  }
+};

@@ -1,4 +1,4 @@
-import { Box, TextField } from "@material-ui/core";
+import { Box, Button, TextField } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
 import Pagination from "@material-ui/lab/Pagination";
 import { useEffect, useState } from "react";
@@ -11,10 +11,20 @@ const useStyles = makeStyles((theme) => ({
   root: {
     "& > *": {
       marginTop: theme.spacing(4),
+      margin: 20,
     },
     marginLeft: "auto",
   },
-  search: {},
+  search: {
+    fontSize: 54,
+  },
+  finder: {
+    marginTop:30
+  },
+  button : {
+    marginTop:20
+  }
+  
 }));
 
 const Finder = () => {
@@ -27,7 +37,7 @@ const Finder = () => {
   useEffect(() => {
     getImages(count, searchName)
       .then((Response) => {
-        console.log(Response);
+        console.log(Response)
         setImage(Response.data.photos.photo);
         setPage(Response.data.photos.pages);
         setEmptyPage(Response.data.photos.total);
@@ -35,24 +45,41 @@ const Finder = () => {
       .catch(() => <Redirect to="/finder" />);
   }, [count, searchName]);
 
-  const onNameChange = (searchName) => {
-    setSearchName(searchName);
-  };
-
   const onNumberChange = (e, page) => {
     setCount(page);
+  };
+
+  const onKeyPressHandler = (event, searchName) => {
+    if (event.keyCode === 13) {
+      setSearchName(searchName);
+    }
+  };
+
+  const onClickHandler = (searchName) => {
+    setSearchName(searchName);
   };
 
   const classes = useStyles();
 
   return (
     <div className={style.content__finder}>
-      <Box component="span" m={1}>
+      <Box component="span" m={1} className={classes.finder}>
         <TextField
           className={classes.search}
           label="Search Images"
-          onChange={(e) => onNameChange(e.target.value)}
+          onKeyDown={(e) => onKeyPressHandler(e, e.target.value)}
         ></TextField>
+      </Box>
+      <Box className={classes.button}>
+        <Button color="primary" onClick={() => onClickHandler("cat")}>
+          Cat
+        </Button>
+        <Button color="primary" onClick={() => onClickHandler("mountains")}>
+          Mountains
+        </Button>
+        <Button color="primary" onClick={() => onClickHandler("car")}>
+          Car
+        </Button>
       </Box>
 
       {emptyPage ? (
@@ -67,15 +94,15 @@ const Finder = () => {
               onChange={(e, page) => onNumberChange(e.target.value, page)}
             />
           </Box>
-           <Box>
+          <Box>
             <Images image={image} />
           </Box>
         </Box>
       ) : (
         <Box>
-          <span>
-            No images here. Would you try to search for anything else?
-          </span>
+          <Box>
+            <b>No images here. Would you try to search for anything else?</b>
+          </Box>
         </Box>
       )}
     </div>
