@@ -1,15 +1,23 @@
-import './App.css';
+import { Box, makeStyles } from '@material-ui/core';
 import Content from './component/Content/Content';
 import Footer from './component/Footer/Footer';
 import Header from './component/Header/Header';
 
+const useStyles = makeStyles((theme) => ({
+  appBlock: {
+    textAlign: "center",
+  }
+
+}));
+
 const App = () => {
+  const classes = useStyles();
   return (
-    <div className="application">
+    <Box className={classes.appBlock}>
       <Header />
       <Content />
       <Footer />
-    </div>
+    </Box>
   );
 }
 

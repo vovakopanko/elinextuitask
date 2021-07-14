@@ -1,9 +1,10 @@
 import { Box, Button, makeStyles } from "@material-ui/core";
 import { useState } from "react";
 import { useEffect } from "react";
-import PlaylistAddCheckIcon from "@material-ui/icons/PlaylistAddCheck";
 import { addFavorites } from "../../../../services/api";
 import TextField from "@material-ui/core/TextField";
+import StarBorderIcon from "@material-ui/icons/StarBorder";
+import StarIcon from "@material-ui/icons/Star";
 
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -25,16 +26,19 @@ const useStyles = makeStyles((theme) => ({
 const Image = ({ img }) => {
   const [tag, setTeg] = useState([]);
   const [idPhoto, setIdPhoto] = useState([]);
+  const [bookmarks, setBookmarks] = useState(true);
 
   useEffect(() => {
+    debugger;
     addFavorites(idPhoto);
   }, [idPhoto]);
 
   const onAddFavoritesPhoto = (photoId) => {
+    setBookmarks(!bookmarks);
     setIdPhoto(photoId);
   };
 
-  const onKeyPressHandler = (e,tags) => {
+  const onKeyPressHandler = (e, tags) => {
     if (e.keyCode === 13) {
       alert(`You add tags : ${tags} `);
     }
@@ -63,7 +67,7 @@ const Image = ({ img }) => {
       </Box>
       <Box className={styless.button}>
         <Button variant="contained" onClick={() => onAddFavoritesPhoto(img.id)}>
-          Bookmark it <PlaylistAddCheckIcon />
+          Bookmark it {bookmarks ? <StarBorderIcon /> : <StarIcon color="primary"/>}
         </Button>
       </Box>
       <Box>
@@ -72,7 +76,7 @@ const Image = ({ img }) => {
             id="outlined-basic"
             label="Some tags ?"
             variant="filled"
-            onKeyDown={(e) => onKeyPressHandler(e,e.target.value)}
+            onKeyDown={(e) => onKeyPressHandler(e, e.target.value)}
           />
         </form>
       </Box>

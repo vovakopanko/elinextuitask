@@ -1,6 +1,7 @@
 .content__finder {
     background-color: rgb(236, 236, 236);
     border: 2px solid black;
+    margin-left: -2px;
   }
 
   .finder__search{

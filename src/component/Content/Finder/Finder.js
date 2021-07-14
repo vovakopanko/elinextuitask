@@ -19,12 +19,12 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 54,
   },
   finder: {
-    marginTop:30
+    marginTop: 30
   },
-  button : {
-    marginTop:20
+  button: {
+    marginTop: 20
   }
-  
+
 }));
 
 const Finder = () => {
@@ -41,28 +41,31 @@ const Finder = () => {
         setImage(Response.data.photos.photo);
         setPage(Response.data.photos.pages);
         setEmptyPage(Response.data.photos.total);
+        setCount(Response.data.photos.page)
       })
       .catch(() => <Redirect to="/finder" />);
   }, [count, searchName]);
 
-  const onNumberChange = (e, page) => {
-    setCount(page);
+  const onNumberChange = (e,count) => {
+    setCount(count);
   };
 
   const onKeyPressHandler = (event, searchName) => {
     if (event.keyCode === 13) {
+      setCount(1)
       setSearchName(searchName);
     }
   };
 
-  const onClickHandler = (searchName) => {
+  const onClickHandler = (searchName,count) => {
+    setCount(count)
     setSearchName(searchName);
   };
 
   const classes = useStyles();
 
   return (
-    <div className={style.content__finder}>
+    <Box className={style.content__finder}>
       <Box component="span" m={1} className={classes.finder}>
         <TextField
           className={classes.search}
@@ -71,13 +74,13 @@ const Finder = () => {
         ></TextField>
       </Box>
       <Box className={classes.button}>
-        <Button color="primary" onClick={() => onClickHandler("cat")}>
+        <Button color="primary" onClick={() => onClickHandler("cat",1)}>
           Cat
         </Button>
-        <Button color="primary" onClick={() => onClickHandler("mountains")}>
+        <Button color="primary" onClick={() => onClickHandler("mountains",1)}>
           Mountains
         </Button>
-        <Button color="primary" onClick={() => onClickHandler("car")}>
+        <Button color="primary" onClick={() => onClickHandler("car",1)}>
           Car
         </Button>
       </Box>
@@ -86,12 +89,13 @@ const Finder = () => {
         <Box>
           <Box className={classes.root}>
             <Pagination
-              count={20}
+              color="primary"
               variant="outlined"
               shape="rounded"
               defaultPage={1}
-              count={page}
-              onChange={(e, page) => onNumberChange(e.target.value, page)}
+              count={emptyPage}
+              page={count}
+              onChange={(e, count) => onNumberChange(e, count)}
             />
           </Box>
           <Box>
@@ -105,7 +109,7 @@ const Finder = () => {
           </Box>
         </Box>
       )}
-    </div>
+    </Box>
   );
 };
 

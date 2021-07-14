@@ -1,3 +1,4 @@
+import { Box } from '@material-ui/core';
 import { Redirect, Route, Switch } from 'react-router-dom';
 import BookMarks from './BookMarks/BookMarks';
 import style from './Content.module.css'
@@ -6,7 +7,7 @@ import Login from './Login/Login';
 import SideBar from './SideBar/SideBar';
 
 const Content = () => {
-  return <div className={style.application__content}>
+  return <Box className={style.application__content}>
     <SideBar />
     <Switch>
       <Route path="/finder" render={() => <Finder />} />
@@ -14,7 +15,7 @@ const Content = () => {
       <Route path="/registration" render={() => <Login />} />
       <Route exact path="/" render={() => <Redirect to="/finder" />} />
     </Switch>
-  </div>
+  </Box>
 }
 
 export default Content;

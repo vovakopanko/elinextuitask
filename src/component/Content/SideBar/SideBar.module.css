@@ -17,11 +17,11 @@
 }
 
 .sideBar__bookmarks_active img{
-  box-shadow: 5px 0 10px rgba(92, 92, 92, 0.8);
+  box-shadow: 6px 0 10px rgba(22, 9, 65, 0.8);
   border-radius: 50px;
 }
 
 .sideBar__sky_active img{
-  box-shadow: 5px 0 10px rgba(92, 92, 92, 0.8);
+  box-shadow: 6px 0 10px rgba(22, 9, 65, 0.8);
   border-radius: 50px;
 }
