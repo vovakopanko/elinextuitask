@@ -23,3 +23,5 @@ export const addFavorites = (id) => {
     console.log(error);
   }
 };
+
+// https://api.flickr.com/services/rest/?method=flickr.favorites.getPublicList&api_key=f588cb341c6f6148320caa8e9b68183f&format=json&nojsoncallback=1

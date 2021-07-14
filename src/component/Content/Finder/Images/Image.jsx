@@ -28,11 +28,16 @@ const Image = ({ img }) => {
 
   useEffect(() => {
     addFavorites(idPhoto);
-    debugger;
   }, [idPhoto]);
 
   const onAddFavoritesPhoto = (photoId) => {
     setIdPhoto(photoId);
+  };
+
+  const onKeyPressHandler = (e,tags) => {
+    if (e.keyCode === 13) {
+      alert(`You add tags : ${tags} `);
+    }
   };
 
   const onAddTagsForCurrentPhoto = (event) => {
@@ -63,7 +68,12 @@ const Image = ({ img }) => {
       </Box>
       <Box>
         <form className={styless.root} noValidate autoComplete="off">
-          <TextField id="outlined-basic" label="Some tags ?" variant="filled" />
+          <TextField
+            id="outlined-basic"
+            label="Some tags ?"
+            variant="filled"
+            onKeyDown={(e) => onKeyPressHandler(e,e.target.value)}
+          />
         </form>
       </Box>
     </Box>
