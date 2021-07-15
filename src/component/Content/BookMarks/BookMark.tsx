@@ -25,11 +25,11 @@ type PropsType = {
 
 const Bookmark: React.FC<PropsType> = ({ photo }) => {
   const onRemoveFavoritesPhoto = (id: string) => {
-    const photo = localStorage["addFavorites"];
+    const photo = localStorage["favorites"];
     const results = JSON.parse(photo);
     for (let i = 0; i < results.length; i++)
       if (results[i].id === id) results.splice(i, 1);
-    localStorage["addFavorites"] = JSON.stringify(results);
+    localStorage["favorites"] = JSON.stringify(results);
   };
 
   const styless = useStyles();
