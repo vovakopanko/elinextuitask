@@ -36,7 +36,6 @@ const Finder = () => {
   useEffect(() => {
     getImages(count, searchName)
       .then((Response) => {
-        console.log(Response);
         setImage(Response.data.photos.photo);
         setPage(Response.data.photos.pages);
         setEmptyPage(Response.data.photos.total);

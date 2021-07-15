@@ -1,38 +1,35 @@
-import { Box, Button } from "@material-ui/core";
+import { Box, Button, Grid, makeStyles } from "@material-ui/core";
 import { useEffect } from "react";
 import { useState } from "react";
+import Bookmark from "./BookMark";
 import style from "./BookMarks.module.css";
+
+const useStyles = makeStyles((theme) => ({
+  photos: {
+    border: "1px solid black",
+    padding: 5,
+  },
+}));
 
 const BookMarks = () => {
   const [Photos, getPhotos] = useState([]);
 
   useEffect(() => {
-    const photo = localStorage.getItem("addFavorites") || [];
+    const photo = localStorage.getItem("addFavorites");
     getPhotos(JSON.parse(photo));
-  });
-  const srcPath =
-    "https://farm" +
-    Photos.farm +
-    ".staticflickr.com/" +
-    Photos.server +
-    "/" +
-    Photos.id +
-    "_" +
-    Photos.secret +
-    ".jpg";
+  }, [Photos]);
 
+  const styless = useStyles();
   return (
     <Box className={style.content__bookmarks}>
-      <Box className={style.bookmark__block}>
-        <img
-          src={srcPath}
-          alt="Photo provided Flickr"
-          className={style.bookmark__img}
-        />
-        <Box>
-          <Button color="primary">Remove It!</Button>
-        </Box>
-      </Box>
+      <Grid container>
+        
+        {Photos!==null?Photos.map((p) => (
+          <Grid xs={4} key={p.id} item className={styless.photos}>
+            <Bookmark photo={p} />
+          </Grid>
+        )):<Box/>}
+      </Grid>
     </Box>
   );
 };

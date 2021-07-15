@@ -28,12 +28,12 @@ const Image = ({ img }) => {
   const [bookmarks, setBookmarks] = useState(true);
 
   useEffect(() => {
-    localStorage.setItem('addFavorites', JSON.stringify(favPhoto))
+    localStorage.setItem("addFavorites", JSON.stringify(favPhoto));
   }, [favPhoto]);
 
   const onAddFavoritesPhoto = () => {
     setBookmarks(!bookmarks);
-    setFavPhoto(img)
+    setFavPhoto([...favPhoto, { img }]);
   };
 
   const onKeyPressHandler = (e, tags) => {
@@ -61,12 +61,17 @@ const Image = ({ img }) => {
   return (
     <Box>
       <Box>
-        <img src={srcPath} alt="Photo provided Flickr" className={styless.image} />
+        <img
+          src={srcPath}
+          alt="Photo provided Flickr"
+          className={styless.image}
+        />
         {img.title}
       </Box>
       <Box className={styless.button}>
         <Button variant="contained" onClick={() => onAddFavoritesPhoto(img)}>
-          Bookmark it {bookmarks ? <StarBorderIcon /> : <StarIcon color="primary"/>}
+          Bookmark it{" "}
+          {bookmarks ? <StarBorderIcon /> : <StarIcon color="primary" />}
         </Button>
       </Box>
       <Box>
