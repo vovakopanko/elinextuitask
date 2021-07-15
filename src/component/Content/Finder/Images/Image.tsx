@@ -33,9 +33,18 @@ const Image:React.FC<PropsType> = ({img,setFavPhoto,favPhoto}) => {
   const [tag, setTeg] = useState([]);
   const [bookmarks, setBookmarks] = useState(true);
 
-  const onAddFavoritesPhoto = () => {
+  const onAddFavoritesPhoto = (id: string) => {
     setBookmarks(!bookmarks);
-    setFavPhoto([...favPhoto, img]);
+    if(bookmarks){
+      setFavPhoto([...favPhoto, img]);
+    } else {
+    const photo = localStorage["favorites"];
+    const results = JSON.parse(photo);
+    for (let i = 0; i < results.length; i++)
+    if (results[i].id === id) results.splice(i, 1);
+    localStorage["favorites"] = JSON.stringify(results);
+    }
+
   };
 
   const onKeyPressHandler = (e:any, tags:string) => {
@@ -72,7 +81,7 @@ const Image:React.FC<PropsType> = ({img,setFavPhoto,favPhoto}) => {
         {img.title}
       </Box>
       <Box className={`${styless.button}+${style.block__button}`}>
-        <Button variant="contained" onClick={() => onAddFavoritesPhoto()}>
+        <Button variant="contained" onClick={() => onAddFavoritesPhoto(img.id)}>
           Bookmark it
           {bookmarks ? <StarBorderIcon /> : <StarIcon color="primary" />}
         </Button>
