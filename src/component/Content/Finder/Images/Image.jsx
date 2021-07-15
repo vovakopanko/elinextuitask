@@ -24,16 +24,11 @@ const useStyles = makeStyles((theme) => ({
 
 const Image = ({ img ,setFavPhoto , favPhoto}) => {
   const [tag, setTeg] = useState([]);
-  // const [favPhoto, setFavPhoto] = useState([]);
   const [bookmarks, setBookmarks] = useState(true);
-
-  // useEffect(() => {
-  //   localStorage.setItem("addFavorites", JSON.stringify(favPhoto));
-  // }, [favPhoto]);
 
   const onAddFavoritesPhoto = () => {
     setBookmarks(!bookmarks);
-    setFavPhoto([...favPhoto, { img }]);
+    setFavPhoto([...favPhoto, img ]);
   };
 
   const onKeyPressHandler = (e, tags) => {

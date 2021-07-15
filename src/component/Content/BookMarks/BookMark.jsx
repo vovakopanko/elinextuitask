@@ -17,22 +17,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Bookmark = ({ photo }) => {
-  const onRemoveFavoritesPhoto = () => {
-    localStorage.removeItem('addFavorites');
+const Bookmark = ( {photo} ) => {
+  const onRemoveFavoritesPhoto = (id) => {
+    // localStorage.removeItem("addFavorites");
+    const photo = localStorage["addFavorites"];
+    const results = (JSON.parse(photo));
+    for (let i = 0; i < results.length; i++)
+      if (results[i].id == id) results.splice(i, 1);
+    localStorage["addFavorites"] = JSON.stringify(results);
+
   };
 
   const styless = useStyles();
 
   const srcPath =
     "https://farm" +
-    photo.img.farm +
+    photo.farm +
     ".staticflickr.com/" +
-    photo.img.server +
+    photo.server +
     "/" +
-    photo.img.id +
+    photo.id +
     "_" +
-    photo.img.secret +
+    photo.secret +
     ".jpg";
   return (
     <Box>
@@ -42,10 +48,10 @@ const Bookmark = ({ photo }) => {
           alt="Photo provided Flickr"
           className={styless.image}
         />
-        {photo.img.title}
+        {photo.title}
       </Box>
       <Box className={styless.button}>
-        <Button variant="contained" onClick={() => onRemoveFavoritesPhoto()}>
+        <Button variant="contained" onClick={() => onRemoveFavoritesPhoto(photo.id)}>
           Remove it
         </Button>
       </Box>

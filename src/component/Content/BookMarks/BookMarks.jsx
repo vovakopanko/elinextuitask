@@ -20,6 +20,7 @@ const BookMarks = () => {
   }, [Photos]);
 
   const styless = useStyles();
+
   return (
     <Box className={style.content__bookmarks}>
       <Grid container>
