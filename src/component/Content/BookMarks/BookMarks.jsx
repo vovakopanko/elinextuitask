@@ -1,4 +1,4 @@
-import { Box, Button, Grid, makeStyles } from "@material-ui/core";
+import { Box, Grid, makeStyles } from "@material-ui/core";
 import { useEffect } from "react";
 import { useState } from "react";
 import Bookmark from "./BookMark";
@@ -23,12 +23,15 @@ const BookMarks = () => {
   return (
     <Box className={style.content__bookmarks}>
       <Grid container>
-        
-        {Photos!==null?Photos.map((p) => (
-          <Grid xs={4} key={p.id} item className={styless.photos}>
-            <Bookmark photo={p} />
-          </Grid>
-        )):<Box/>}
+        {Photos !== null ? (
+          Photos.map((p) => (
+            <Grid xs={4} key={p.id} item className={styless.photos}>
+              <Bookmark photo={p} />
+            </Grid>
+          ))
+        ) : (
+          <Box />
+        )}
       </Grid>
     </Box>
   );

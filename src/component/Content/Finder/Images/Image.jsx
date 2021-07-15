@@ -22,14 +22,14 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Image = ({ img }) => {
+const Image = ({ img ,setFavPhoto , favPhoto}) => {
   const [tag, setTeg] = useState([]);
-  const [favPhoto, setFavPhoto] = useState([]);
+  // const [favPhoto, setFavPhoto] = useState([]);
   const [bookmarks, setBookmarks] = useState(true);
 
-  useEffect(() => {
-    localStorage.setItem("addFavorites", JSON.stringify(favPhoto));
-  }, [favPhoto]);
+  // useEffect(() => {
+  //   localStorage.setItem("addFavorites", JSON.stringify(favPhoto));
+  // }, [favPhoto]);
 
   const onAddFavoritesPhoto = () => {
     setBookmarks(!bookmarks);
