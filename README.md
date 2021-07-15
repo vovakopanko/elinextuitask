@@ -1,5 +1,9 @@
 # Getting Started with Create React App
 
+## Viewing the demo application
+
+https://searchphoto-kopanko.herokuapp.com/finder
+
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
 ## Available Scripts
