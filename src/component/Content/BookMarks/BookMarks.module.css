@@ -3,3 +3,12 @@
   border: 2px solid black;
   margin-left: -2px;
 }
+
+.bookmark__block{
+  
+  border: 1px solid black;
+}
+
+.bookmark__img{
+  padding: 20px;
+}

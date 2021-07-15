@@ -1,7 +1,6 @@
 import { Box, Button, makeStyles } from "@material-ui/core";
 import { useState } from "react";
 import { useEffect } from "react";
-import { addFavorites } from "../../../../services/api";
 import TextField from "@material-ui/core/TextField";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import StarIcon from "@material-ui/icons/Star";
@@ -25,17 +24,16 @@ const useStyles = makeStyles((theme) => ({
 
 const Image = ({ img }) => {
   const [tag, setTeg] = useState([]);
-  const [idPhoto, setIdPhoto] = useState([]);
+  const [favPhoto, setFavPhoto] = useState([]);
   const [bookmarks, setBookmarks] = useState(true);
 
   useEffect(() => {
-    debugger;
-    addFavorites(idPhoto);
-  }, [idPhoto]);
+    localStorage.setItem('addFavorites', JSON.stringify(favPhoto))
+  }, [favPhoto]);
 
-  const onAddFavoritesPhoto = (photoId) => {
+  const onAddFavoritesPhoto = () => {
     setBookmarks(!bookmarks);
-    setIdPhoto(photoId);
+    setFavPhoto(img)
   };
 
   const onKeyPressHandler = (e, tags) => {
@@ -63,17 +61,18 @@ const Image = ({ img }) => {
   return (
     <Box>
       <Box>
-        <img src={srcPath} alt="random img" className={styless.image} />
+        <img src={srcPath} alt="Photo provided Flickr" className={styless.image} />
+        {img.title}
       </Box>
       <Box className={styless.button}>
-        <Button variant="contained" onClick={() => onAddFavoritesPhoto(img.id)}>
+        <Button variant="contained" onClick={() => onAddFavoritesPhoto(img)}>
           Bookmark it {bookmarks ? <StarBorderIcon /> : <StarIcon color="primary"/>}
         </Button>
       </Box>
       <Box>
         <form className={styless.root} noValidate autoComplete="off">
           <TextField
-            id="outlined-basic"
+            id={img.id}
             label="Some tags ?"
             variant="filled"
             onKeyDown={(e) => onKeyPressHandler(e, e.target.value)}

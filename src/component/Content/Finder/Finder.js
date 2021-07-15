@@ -19,12 +19,11 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 54,
   },
   finder: {
-    marginTop: 30
+    marginTop: 30,
   },
   button: {
-    marginTop: 20
-  }
-
+    marginTop: 20,
+  },
 }));
 
 const Finder = () => {
@@ -37,33 +36,32 @@ const Finder = () => {
   useEffect(() => {
     getImages(count, searchName)
       .then((Response) => {
-        console.log(Response)
+        console.log(Response);
         setImage(Response.data.photos.photo);
         setPage(Response.data.photos.pages);
         setEmptyPage(Response.data.photos.total);
-        setCount(Response.data.photos.page)
+        setCount(Response.data.photos.page);
       })
       .catch(() => <Redirect to="/finder" />);
   }, [count, searchName]);
 
-  const onNumberChange = (e,count) => {
+  const onNumberChange = (e, count) => {
     setCount(count);
   };
 
   const onKeyPressHandler = (event, searchName) => {
     if (event.keyCode === 13) {
-      setCount(1)
+      setCount(1);
       setSearchName(searchName);
     }
   };
 
-  const onClickHandler = (searchName,count) => {
-    setCount(count)
+  const onClickHandler = (searchName, count) => {
+    setCount(count);
     setSearchName(searchName);
   };
 
   const classes = useStyles();
-
   return (
     <Box className={style.content__finder}>
       <Box component="span" m={1} className={classes.finder}>
@@ -74,17 +72,16 @@ const Finder = () => {
         ></TextField>
       </Box>
       <Box className={classes.button}>
-        <Button color="primary" onClick={() => onClickHandler("cat",1)}>
+        <Button color="primary" onClick={() => onClickHandler("cat", 1)}>
           Cat
         </Button>
-        <Button color="primary" onClick={() => onClickHandler("mountains",1)}>
+        <Button color="primary" onClick={() => onClickHandler("mountains", 1)}>
           Mountains
         </Button>
-        <Button color="primary" onClick={() => onClickHandler("car",1)}>
+        <Button color="primary" onClick={() => onClickHandler("car", 1)}>
           Car
         </Button>
       </Box>
-
       {emptyPage ? (
         <Box>
           <Box className={classes.root}>
