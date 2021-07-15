@@ -6,7 +6,7 @@ import Finder from './Finder/Finder';
 import Login from './Login/Login';
 import SideBar from './SideBar/SideBar';
 
-const Content = () => {
+const Content: React.FC = () => {
   return <Box className={style.application__content}>
     <SideBar />
     <Switch>

@@ -3,7 +3,7 @@ import style from './Header.module.css'
 import { NavLink } from 'react-router-dom';
 import { Box } from '@material-ui/core';
 
-const Header = () => {
+const Header:React.FC = () => {
     return <Box className={style.application__header}>
         <Box className={style.header__nameApp}>
             <b>

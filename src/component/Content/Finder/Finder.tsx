@@ -3,7 +3,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import Pagination from "@material-ui/lab/Pagination";
 import { useEffect, useState } from "react";
 import { Redirect } from "react-router-dom";
-import { getImages } from "../../../services/api";
+import { getPhotosDataAsync, getPhotosDataAsync as getImagesAsync, Photo } from "../../../services/api";
 import style from "./Finder.module.css";
 import Images from "./Images/Images";
 
@@ -27,47 +27,60 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Finder = () => {
-  const [image, setImage] = useState([]);
+  const [images, setImages] = useState<Array<Photo>>([]);
   const [count, setCount] = useState(1);
   const [page, setPage] = useState(1);
-  const [emptyPage, setEmptyPage] = useState();
+  const [emptyPage, setEmptyPage] = useState<number>();
   const [searchName, setSearchName] = useState("Belarus");
+  const [wasError, setWasError] = useState(false);
 
   useEffect(() => {
-    getImages(count, searchName)
-      .then((Response) => {
-        setImage(Response.data.photos.photo);
-        setPage(Response.data.photos.pages);
-        setEmptyPage(Response.data.photos.total);
-        setCount(Response.data.photos.page);
-      })
-      .catch(() => <Redirect to="/finder" />);
+    const loadImagesAsync = async () => {
+      try {
+        const photosData = await getPhotosDataAsync(count, searchName);
+        if (photosData) {
+          setImages(photosData.photo);
+          setPage(photosData.pages);
+          setEmptyPage(photosData.total);
+          setCount(photosData.page);
+        }
+      }
+      catch {
+        setWasError(true);
+      }
+    }
+
+    loadImagesAsync();
   }, [count, searchName]);
 
-  const onNumberChange = (e, count) => {
+  const onNumberChange = (e: any, count: number) => {
     setCount(count);
   };
 
-  const onKeyPressHandler = (event, searchName) => {
+  const onKeyPressHandler = (event: any, searchName: string) => {
     if (event.keyCode === 13) {
       setCount(1);
       setSearchName(searchName);
     }
   };
 
-  const onClickHandler = (searchName, count) => {
+  const onClickHandler = (searchName: string, count: number) => {
     setCount(count);
     setSearchName(searchName);
   };
 
   const classes = useStyles();
+
+  if (wasError)
+    return <Redirect to="/flickr" />
+
   return (
     <Box className={style.content__finder}>
       <Box component="span" m={1} className={classes.finder}>
         <TextField
           className={classes.search}
           label="Search Images"
-          onKeyDown={(e) => onKeyPressHandler(e, e.target.value)}
+          onKeyDown={(e:any) => onKeyPressHandler(e, e.target.value)}
         ></TextField>
       </Box>
       <Box className={classes.button}>
@@ -95,7 +108,7 @@ const Finder = () => {
             />
           </Box>
           <Box>
-            <Images image={image} />
+            <Images images={images} />
           </Box>
         </Box>
       ) : (

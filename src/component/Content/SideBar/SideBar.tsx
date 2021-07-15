@@ -4,7 +4,11 @@ import bookmarks from './../../../image/bookmarks.png'
 import { NavLink } from 'react-router-dom'
 import { Box } from '@material-ui/core'
 
-const SideBar = () => {
+type SideBarType = {
+
+}
+
+const SideBar:React.FC<SideBarType> = () => {
     return (
         <Box className={style.content__sideBar}>
             <NavLink to="/finder" activeClassName={style.sideBar__sky_active}>

@@ -1,6 +1,7 @@
 import { Box, Grid, makeStyles } from "@material-ui/core";
 import { useEffect } from "react";
 import { useState } from "react";
+import { Photo } from "../../../services/api";
 import Bookmark from "./BookMark";
 import style from "./BookMarks.module.css";
 
@@ -11,21 +12,29 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const BookMarks = () => {
-  const [Photos, getPhotos] = useState([]);
+const BookMarks: React.FC = () => {
+  const [photos, setPhotos] = useState<Array<Photo>>([]);
 
   useEffect(() => {
-    const photo = localStorage.getItem("addFavorites");
-    getPhotos(JSON.parse(photo));
-  }, [Photos]);
+    const photoJson = localStorage.getItem("favorites");
+
+    if (photoJson) {
+      const photos: Array<Photo> = JSON.parse(photoJson);
+      setPhotos(photos);
+    }
+  }, [photos]);
+
+  // const onRemoveAllFavoritesPhoto = () => {
+  //   localStorage.removeItem("addFavorites");
+  // };
 
   const styless = useStyles();
 
   return (
     <Box className={style.content__bookmarks}>
       <Grid container>
-        {Photos !== null ? (
-          Photos.map((p) => (
+        {photos !== null ? (
+          photos.map((p: Photo) => (
             <Grid xs={4} key={p.id} item className={styless.photos}>
               <Bookmark photo={p} />
             </Grid>
@@ -34,6 +43,9 @@ const BookMarks = () => {
           <Box />
         )}
       </Grid>
+      {/* <Button variant="contained" onClick={() => onRemoveAllFavoritesPhoto()}>
+        Remove all
+      </Button> */}
     </Box>
   );
 };

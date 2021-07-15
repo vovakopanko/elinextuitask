@@ -1,5 +1,7 @@
 import { Box, Button, makeStyles } from "@material-ui/core";
 
+import { Photo } from '../../../services/api'
+
 const useStyles = makeStyles((theme) => ({
   image: {
     width: "90%",
@@ -17,15 +19,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Bookmark = ( {photo} ) => {
-  const onRemoveFavoritesPhoto = (id) => {
-    // localStorage.removeItem("addFavorites");
-    const photo = localStorage["addFavorites"];
-    const results = (JSON.parse(photo));
-    for (let i = 0; i < results.length; i++)
-      if (results[i].id == id) results.splice(i, 1);
-    localStorage["addFavorites"] = JSON.stringify(results);
+type PropsType = {
+  photo: Photo
+}
 
+const Bookmark: React.FC<PropsType> = ({ photo }) => {
+  const onRemoveFavoritesPhoto = (id: string) => {
+    const photo = localStorage["addFavorites"];
+    const results = JSON.parse(photo);
+    for (let i = 0; i < results.length; i++)
+      if (results[i].id === id) results.splice(i, 1);
+    localStorage["addFavorites"] = JSON.stringify(results);
   };
 
   const styless = useStyles();
@@ -45,13 +49,16 @@ const Bookmark = ( {photo} ) => {
       <Box>
         <img
           src={srcPath}
-          alt="Photo provided Flickr"
+          alt={photo.title}
           className={styless.image}
         />
         {photo.title}
       </Box>
       <Box className={styless.button}>
-        <Button variant="contained" onClick={() => onRemoveFavoritesPhoto(photo.id)}>
+        <Button
+          variant="contained"
+          onClick={() => onRemoveFavoritesPhoto(photo.id)}
+        >
           Remove it
         </Button>
       </Box>

@@ -30,7 +30,11 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-const Login = () => {
+type LoginType = {
+    // Ts body
+}
+
+const Login: React.FC<LoginType> = (props) => {
     const classes = useStyles();
 
     const [values, setValues] = useState({

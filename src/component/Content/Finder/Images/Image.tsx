@@ -1,9 +1,10 @@
 import { Box, Button, makeStyles } from "@material-ui/core";
 import { useState } from "react";
-import { useEffect } from "react";
 import TextField from "@material-ui/core/TextField";
 import StarBorderIcon from "@material-ui/icons/StarBorder";
 import StarIcon from "@material-ui/icons/Star";
+import style from "./Images.module.css";
+import { Photo } from "../../../../services/api";
 
 const useStyles = makeStyles((theme) => ({
   image: {
@@ -22,25 +23,32 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const Image = ({ img ,setFavPhoto , favPhoto}) => {
+type PropsType={
+  img:Photo,
+  setFavPhoto:any,
+  favPhoto:Array<Photo>
+}
+
+const Image:React.FC<PropsType> = ({img,setFavPhoto,favPhoto}) => {
   const [tag, setTeg] = useState([]);
   const [bookmarks, setBookmarks] = useState(true);
 
   const onAddFavoritesPhoto = () => {
     setBookmarks(!bookmarks);
-    setFavPhoto([...favPhoto, img ]);
+    setFavPhoto([...favPhoto, img]);
   };
 
-  const onKeyPressHandler = (e, tags) => {
+  const onKeyPressHandler = (e:any, tags:string) => {
     if (e.keyCode === 13) {
       alert(`You add tags : ${tags} `);
     }
   };
 
-  const onAddTagsForCurrentPhoto = (event) => {
-    setTeg(event);
-    console.log(event);
-  };
+  // const onAddTagsForCurrentPhoto = (event) => {
+  //   setTeg(event);
+  //   console.log(event);
+  // };
+
   const styless = useStyles();
 
   const srcPath =
@@ -54,8 +62,8 @@ const Image = ({ img ,setFavPhoto , favPhoto}) => {
     img.secret +
     ".jpg";
   return (
-    <Box>
-      <Box>
+    <Box className={style.block__image}>
+      <Box className={style.image__item}>
         <img
           src={srcPath}
           alt="Photo provided Flickr"
@@ -63,19 +71,19 @@ const Image = ({ img ,setFavPhoto , favPhoto}) => {
         />
         {img.title}
       </Box>
-      <Box className={styless.button}>
-        <Button variant="contained" onClick={() => onAddFavoritesPhoto(img)}>
-          Bookmark it{" "}
+      <Box className={`${styless.button}+${style.block__button}`}>
+        <Button variant="contained" onClick={() => onAddFavoritesPhoto()}>
+          Bookmark it
           {bookmarks ? <StarBorderIcon /> : <StarIcon color="primary" />}
         </Button>
       </Box>
-      <Box>
+      <Box className={style.block__field}>
         <form className={styless.root} noValidate autoComplete="off">
           <TextField
             id={img.id}
             label="Some tags ?"
             variant="filled"
-            onKeyDown={(e) => onKeyPressHandler(e, e.target.value)}
+            onKeyDown={(e:any) => onKeyPressHandler(e, e.target.value)}
           />
         </form>
       </Box>

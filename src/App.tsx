@@ -7,7 +7,6 @@ const useStyles = makeStyles((theme) => ({
   appBlock: {
     textAlign: "center",
   }
-
 }));
 
 const App = () => {

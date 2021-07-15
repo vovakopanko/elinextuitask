@@ -1,6 +1,25 @@
 .block__images {
   overflow-y: scroll;
   height: 780px;
-
 }
 
+.block__image {
+  display: grig;
+  grid-template-columns: 1fr;
+  grid-template-rows:  1fr minmax(100px, auto) minmax(100px, auto);
+}
+
+.image__item {
+  grid-row-start: 1;
+  grid-row-end: 2;
+}
+
+.block__button {
+  grid-row-start: 2;
+  grid-row-end: 3;
+}
+
+.block__field {
+  grid-row-start: 3;
+  grid-row-end: 4;
+}
