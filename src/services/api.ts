@@ -36,11 +36,11 @@ export type PhotosResponse = {
 
 export const getPhotosDataAsync = async (count: number, searchName: string) => {
   try {
-    const response= await axios.get<PhotosResponse>(
+    const response= await axios.get<PhotosResponseData>(
       `${baseURL}flickr.photos.search&api_key=${API_KEY}&tags=${searchName}&per_page=12&page=${count}&format=json&nojsoncallback=1`
     );
 
-    return response.data.data.photos;
+    return response.data.photos;
   } catch (error) {
     console.log(error);
   }
